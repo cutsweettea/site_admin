@@ -9,14 +9,22 @@
     </body>
     <script>
         const body = document.getElementById('body');
+        function decrypt(encryptedData, hashedPwd){
+            let code;  
+            code = CryptoJS.AES.decrypt(encryptedData, hashedPwd);
+            let decryptedMessage = '';
+            if (code.sigBytes < 0){
+                decryptedMessage = 'nope';
+                return decryptedMessage;
+            }
+            decryptedMessage = code.toString(CryptoJS.enc.Utf8);
+            return decryptedMessage;
+        }
+
         function switch_page(path, pwd) {
             fetch(`https://admin.jugg.school/${path}`)
             .then(res => res.text()).then(data => {
-                console.log('start');
-                const dec = CryptoJS.AES.decrypt(data, pwd);
-                console.log(dec);
-                body.innerHTML = dec;
-                console.log('finish');
+                body.innerHTML = decrypt(data, pwd);
             });
         }
 
