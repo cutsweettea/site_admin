@@ -15,16 +15,13 @@
                 console.log('start');
                 const data = new TextDecoder().decode(Uint8Array.fromHex(hex_data));
                 console.log(data);
-                const dec = CryptoJS.AES.decrypt(data, pwd, {
-                    mode: CryptoJS.mode.CBC,
-                    padding: CryptoJS.pad.Pkcs7
-                });
+                const dec = CryptoJS.AES.decrypt(data, pwd);
                 console.log(dec);
                 body.innerHTML = dec;
                 console.log('finish');
             });
         }
 
-        switch_page('main', '#~Zqt}w)jD*Qb66%,=O~WwVW^O_7>aqV');
+        switch_page('main', "v65z#!~FP|`gw;zI[:kts&:NlEB2-!Q>M31b$uY+b|jy[qvQ14gL6u:'[>ITv7o%yVLO={C3.F)?8sD6^*)f+LLH{|>/#N=7(IKjm_tuCL,{AX4_;bm|f.bLG!{3Re/Q1C#n2^kosL?");
     </script>
 </html>
