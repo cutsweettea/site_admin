@@ -4,7 +4,7 @@ const app = express();
 const PORT = 4567;
 
 app.get('/', (req: express.Request, res: express.Response) => {
-    res.status(200).send('hello');
+    res.sendFile('./site/pages/main.html');
 });
 
 app.listen(PORT, () => {
