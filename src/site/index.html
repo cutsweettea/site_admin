@@ -12,14 +12,17 @@
         function switch_page(path, pwd) {
             fetch(`https://admin.jugg.school/${path}`)
             .then(res => res.text()).then(hex_data => {
+                console.log('start');
                 const data = new TextDecoder().decode(Uint8Array.fromHex(hex_data));
+                console.log(data);
                 const dec = CryptoJS.AES.decrypt(data, pwd, {
                     mode: CryptoJS.mode.CBC,
                     padding: CryptoJS.pad.Pkcs7
                 });
+                console.log(dec);
                 body.innerHTML = dec;
+                console.log('finish');
             });
-            CryptoJS.AES.encrypt()
         }
 
         switch_page('main', '#~Zqt}w)jD*Qb66%,=O~WwVW^O_7>aqV');
