@@ -11,10 +11,8 @@
         const body = document.getElementById('body');
         function switch_page(path, pwd) {
             fetch(`https://admin.jugg.school/${path}`)
-            .then(res => res.text()).then(hex_data => {
+            .then(res => res.text()).then(data => {
                 console.log('start');
-                const data = new TextDecoder().decode(Uint8Array.fromHex(hex_data));
-                console.log(data);
                 const dec = CryptoJS.AES.decrypt(data, pwd);
                 console.log(dec);
                 body.innerHTML = dec;
