@@ -2,12 +2,26 @@
 <html>
     <head>
         <title>Loading...</title>
+        <script src="https://cloudflare.com"></script>
     </head>
     <body id="body">
         
     </body>
     <script>
         const body = document.getElementById('body');
-        let current_page = 'default';
+        function switch_page(path, pwd) {
+            fetch(`https://admin.jugg.school/${path}`)
+            .then(res => res.text()).then(hex_data => {
+                const data = new TextDecoder().decode(Uint8Array.fromHex(hex_data));
+                const dec = CryptoJS.AES.decrypt(data, pwd, {
+                    mode: CryptoJS.mode.CBC,
+                    padding: CryptoJS.pad.Pkcs7
+                });
+                body.innerHTML = dec;
+            });
+            CryptoJS.AES.encrypt()
+        }
+
+        switch_page('main', '#~Zqt}w)jD*Qb66%,=O~WwVW^O_7>aqV');
     </script>
 </html>
