@@ -1,4 +1,4 @@
-import * as CryptoJS from 'crypto-js';
+import CryptoJS from 'crypto-js';
 
 export function decryptPage(data: string, pwd: string) {
     let code = CryptoJS.AES.decrypt(data, pwd);
