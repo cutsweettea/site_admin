@@ -27,7 +27,6 @@ const DEFAULT_RESPONSE = (res: express.Response, page: string) => {
 `);
 }
 app.post('/:page', (req: express.Request, res: express.Response) => {
-    console.log('here');
     const page = req.params.page;
     if(!page) {
         console.log('no page');
@@ -53,8 +52,7 @@ app.post('/:page', (req: express.Request, res: express.Response) => {
 
     const body_check = getPageParams.safeParse(req.body);
     if(!body_check.success) {
-        const err = JSON.parse(body_check.error.message)[0];
-        console.log(err);
+        console.log('body check error');
         return DEFAULT_RESPONSE(res, page);
     }
 
