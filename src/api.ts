@@ -5,7 +5,7 @@ import { getPageParams } from './generics.ts';
 import { config } from 'dotenv';
 import cookieParser from 'cookie-parser';
 
-config({ path: '/home/amen/panel/src/.env' });
+config({ path: '/home/amen/panel/src/.env', quiet: true });
 
 const app = express();
 
