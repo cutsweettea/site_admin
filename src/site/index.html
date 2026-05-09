@@ -78,7 +78,7 @@
 
             if(!login_res.ok) return;
 
-            const data = await login_res.text();
+            const data = await login_res.json();
             if(!data) return;
 
             if(data["success"]) {
