@@ -4,6 +4,7 @@ import { decryptPage } from './pages.ts';
 import { getPageParams } from './generics.ts';
 
 const app = express();
+app.use(express.json());
 const PORT = 4567;
 
 const PATH = '/home/amen/panel/src/site'
