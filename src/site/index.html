@@ -27,7 +27,7 @@
     <script>
         const body = document.getElementById('body');
         async function switch_page(path, pwd) {
-            var data = await fetch(`https://admin.jugg.school/${path}`, {
+            var get_res = await fetch(`https://admin.jugg.school/${path}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -37,7 +37,11 @@
                 })
             });
 
+            if(!get_res.ok) return;
+
+            const data = get_res.text();
             if(!data) return;
+
             body.innerHTML = data;
             window.pwd = pwd;
         }
