@@ -96,6 +96,7 @@
         async function login2FA(phrase) {
             var login_res = await fetch("https://api.jugg.school/admin/2fa/login", {
                 method: "POST",
+                credentials: 'include',
                 headers: {
                     "Content-Type": "application/json"
                 },
