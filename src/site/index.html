@@ -78,5 +78,38 @@
                 switch_page("2fa", window.stored_pwd);
             }
         }
+
+        async function get2FA() {
+            var res_2fa = await fetch("https://api.jugg.school/admin/2fa");
+            if(!res_2fa.ok) return;
+
+            const data = await res_2fa.json();
+            if(!data) return;
+
+            if(data["success"]) {
+                document.getElementById('gpg').value = data["message"];
+            }
+        }
+
+        async function login2FA(phrase) {
+            var login_res = await fetch("https://api.jugg.school/admin/2fa/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    phrase: phrase
+                })
+            });
+
+            if(!login_res.ok) return;
+
+            const data = await login_res.json();
+            if(!data) return;
+
+            if(data["success"]) {
+                console.log(data['message']);
+            }
+        }
     </script>
 </html>

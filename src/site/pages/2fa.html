@@ -3,10 +3,18 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
         height: 100%;
+    }
+
+    .gpg {
+        resize: none;
+        outline: none;
+        text-align: center;
     }
 </style>
 <div class="content">
-    <h1>hello</h1>
+    <h1>2FA</h1>
+    <textarea id="gpg" class="gpg" onload="get2FA()" disabled>Loading...</textarea>
+    <input id="phrase" type="password" placeholder="Phrase">
+    <button onclick="login2FA(document.getElementById('phrase').value)">Continue...</button>
 </div>
