@@ -19,11 +19,26 @@ app.get('/', (req: express.Request, res: express.Response) => {
     res.sendFile(`${PATH}/index.html`);
 });
 
-app.get('/panel', (req: express.Request, res: express.Response) => {
+app.get('/panel', async (req: express.Request, res: express.Response) => {
     let tfsid;
     if('tfsid' in req.signedCookies) tfsid = req.signedCookies.tfsid;
     else {
         console.log('no tfsid');
+        return res.sendStatus(404);
+    }
+
+    let verified_res = await fetch('https://api.jugg.school/admin/session/verify', {
+        credentials: 'include'
+    });
+
+    if(!verified_res.ok) {
+        console.log('res not ok');
+        return res.sendStatus(404);
+    }
+
+    const data = await verified_res.json();
+    if(!data['success']) {
+        console.log(data);
         return res.sendStatus(404);
     }
 
