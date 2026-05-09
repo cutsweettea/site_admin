@@ -1,7 +1,7 @@
 import express from 'express';
 import { readFileSync, existsSync } from 'fs';
-import { decryptPage } from './pages';
-import { getPageParams } from './generics';
+import { decryptPage } from './pages.ts';
+import { getPageParams } from './generics.ts';
 
 const app = express();
 const PORT = 4567;
