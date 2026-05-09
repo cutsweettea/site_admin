@@ -101,6 +101,10 @@ app.post('/:page', (req: express.Request, res: express.Response) => {
     res.status(200).send(data);
 });
 
+app.post('*', (req: express.Request, res: express.Response) => {
+    return res.sendStatus(404);
+});
+
 app.listen(PORT, () => {
     console.log(`shh im listening to port ${PORT}`);
 })
