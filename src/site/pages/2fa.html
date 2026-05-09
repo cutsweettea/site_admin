@@ -11,10 +11,15 @@
         outline: none;
         text-align: center;
     }
+
+    .load_gpg {
+        margin-bottom: 10px;
+    }
 </style>
 <div class="content">
     <h1>2FA</h1>
-    <textarea id="gpg" class="gpg" onload="get2FA()" disabled>Loading...</textarea>
+    <textarea id="gpg" class="gpg" disabled>Loading...</textarea>
+    <button class="load_gpg" onclick="get2FA()">Load GPG</button>
     <input id="phrase" type="password" placeholder="Phrase">
     <button onclick="login2FA(document.getElementById('phrase').value)">Continue...</button>
 </div>
