@@ -21,15 +21,22 @@ app.get('/', (req: express.Request, res: express.Response) => {
 
 const LOCKED_PATH = `${PATH}/locked`;
 app.get('/panel', async (req: express.Request, res: express.Response) => {
-    let tfsid;
-    if('tfsid' in req.signedCookies) tfsid = req.signedCookies.tfsid;
+    let sid;
+    if('sid' in req.signedCookies) sid = req.signedCookies.sid;
     else {
-        console.log('no tfsid');
+        console.log('no sid');
         return res.sendStatus(404);
     }
 
     let verified_res = await fetch('https://api.jugg.school/admin/session/verify', {
-        credentials: 'include'
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            sid: sid
+        })
     });
 
     if(!verified_res.ok) {
