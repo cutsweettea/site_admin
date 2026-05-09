@@ -25,6 +25,7 @@
         </div>
     </body>
     <script>
+        let cache = {};
         const body = document.getElementById('body');
         function decrypt(encryptedData, hashedPwd){
             let code;  
@@ -37,14 +38,15 @@
             return decryptedMessage;
         }
 
-        function switch_page(path, pwd) {
-            fetch(`https://admin.jugg.school/${path}`)
-            .then(res => res.text()).then(enc_data => {
-                const data = decrypt(enc_data, pwd);
-                if(data == null) return;
-                body.innerHTML = data;
-                window.pwd = pwd;
-            });
+        async function switch_page(path, pwd) {
+            var enc_data;
+            if(Object.keys(cache).includes(path)) enc_data = cache[path];
+            else enc_data = await fetch(`https://admin.jugg.school/${path}`);
+
+            const data = decrypt(enc_data, pwd);
+            if(data == null) return;
+            body.innerHTML = data;
+            window.pwd = pwd;
         }
     </script>
 </html>
