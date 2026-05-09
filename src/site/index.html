@@ -47,7 +47,7 @@
             const js = data.split('<script>')[1].split('</scrip')[0].trim();
             console.log(js);
 
-            const blob = new Blob(js, { type: 'text/javascript' });
+            const blob = new Blob([js], { type: 'text/javascript' });
             const url = URL.createObjectURL(blob);
             const module = await import(url);
             console.log(module);
