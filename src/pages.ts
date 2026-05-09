@@ -5,6 +5,10 @@ export function decryptPage(data: string, pwd: string) {
     let decryptedMessage = '';
 
     if (code.sigBytes < 0) return null;
-    decryptedMessage = code.toString(CryptoJS.enc.Utf8);
+    try {
+        decryptedMessage = code.toString(CryptoJS.enc.Utf8);
+    } catch {
+        return null;
+    }
     return decryptedMessage;
 }
