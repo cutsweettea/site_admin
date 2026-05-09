@@ -33,7 +33,7 @@ app.post('/:page', (req: express.Request, res: express.Response) => {
         return res.sendStatus(404);
     }
 
-    console.log(`get page ${page} from ${req.ip}`)
+    console.log(`get page ${page} from ${req.ip}`);
 
     if(typeof(page) !== 'string') {
         console.log('page not string');
