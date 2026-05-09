@@ -13,6 +13,19 @@ app.get('/', (req: express.Request, res: express.Response) => {
 });
 
 const PAGE_PATH = `${PATH}/pages`;
+const DEFAULT_RESPONSE = (res: express.Response, page: string) => {
+    return res.status(404).send(`<!DOCTYPE html>\
+<html lang="en">\
+<head>\
+<meta charset="utf-8">\
+<title>Error</title>\
+</head>\
+<body>\
+<pre>Cannot POST /${page}</pre>\
+</body>\
+</html>\
+`);
+}
 app.post('/:page', (req: express.Request, res: express.Response) => {
     const page = req.params.page;
     if(!page) {
@@ -20,22 +33,27 @@ app.post('/:page', (req: express.Request, res: express.Response) => {
         return res.sendStatus(404);
     }
 
+    if(typeof(page) !== 'string') {
+        console.log('page not string');
+        return res.sendStatus(404);
+    }
+
     const path = `${PAGE_PATH}/${page}`;
     if(!existsSync(path)) {
         console.log('page doesnt exist');
-        return res.sendStatus(404);
+        return DEFAULT_RESPONSE(res, page);
     }
 
     if(!req.body) {
         console.log('no data');
-        return res.sendStatus(404);
+        return DEFAULT_RESPONSE(res, page);
     }
 
     const body_check = getPageParams.safeParse(req.body);
     if(!body_check.success) {
         const err = JSON.parse(body_check.error.message)[0];
         console.log(err);
-        return res.sendStatus(404);
+        return DEFAULT_RESPONSE(res, page);
     }
 
     const enc_data = readFileSync(path).toString();
@@ -47,7 +65,7 @@ app.post('/:page', (req: express.Request, res: express.Response) => {
         data = decryptPage(enc_data, pwd);
     } catch(e) {
         console.log(e);
-        return res.sendStatus(404);
+        return DEFAULT_RESPONSE(res, page);
     }
 
     if(!data) return res.sendStatus(404);
