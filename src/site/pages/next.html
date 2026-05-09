@@ -16,15 +16,15 @@
 </div>
 <script>
     async function login() {
-        const ln = document.getElementById('login_name').value;
-        const pwd = document.getElementById('password').value;
-        const salt = document.getElementById('salt').value;
+        const ln = document.getElementById("login_name").value;
+        const pwd = document.getElementById("password").value;
+        const salt = document.getElementById("salt").value;
 
-        var login_res = await fetch('https://api.jugg.school/admin/login', {
-            method: 'POST',
+        var login_res = await fetch("https://api.jugg.school/admin/login", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify({
                 ln: ln,
@@ -38,8 +38,8 @@
         const data = await login_res.text();
         if(!data) return;
 
-        if(!data['success']) {
-            switch_page('/2fa', window.pwd);
+        if(!data["success"]) {
+            switch_page("/2fa", window.pwd);
         }
     }
 </script>
