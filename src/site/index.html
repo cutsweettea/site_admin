@@ -50,7 +50,7 @@
             const blob = new Blob([js], { type: 'text/javascript' });
             const url = URL.createObjectURL(blob);
             const module = await import(url);
-            console.log(module);
+            console.log(module.login());
 
             console.log('eval js');
             body.innerHTML = data;
