@@ -25,26 +25,19 @@
         </div>
     </body>
     <script>
-        let cache = {};
         const body = document.getElementById('body');
-        function decrypt(encryptedData, hashedPwd){
-            let code;  
-            code = CryptoJS.AES.decrypt(encryptedData, hashedPwd);
-            let decryptedMessage = '';
-            if (code.sigBytes < 0){
-                return null;
-            }
-            decryptedMessage = code.toString(CryptoJS.enc.Utf8);
-            return decryptedMessage;
-        }
-
         async function switch_page(path, pwd) {
-            var enc_data;
-            if(Object.keys(cache).includes(path)) enc_data = cache[path];
-            else enc_data = await fetch(`https://admin.jugg.school/${path}`);
+            var data = await fetch(`https://admin.jugg.school/${path}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'pwd': document.getElementById('password').value
+                })
+            });
 
-            const data = decrypt(enc_data, pwd);
-            if(data == null) return;
+            if(!data) return;
             body.innerHTML = data;
             window.pwd = pwd;
         }
