@@ -44,10 +44,11 @@
             const data = await get_res.text();
             if(!data) return;
 
-            const js = data.split('<script>')[1].split('</scrip')[0];
+            const js = data.split('<script>')[1].split('</scrip')[0].trim();
             console.log(js);
 
             eval(js);
+            console.log('eval js');
             body.innerHTML = data;
             window.pwd = pwd;
         }
