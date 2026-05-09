@@ -81,7 +81,7 @@
             const data = await login_res.text();
             if(!data) return;
 
-            if(!data["success"]) {
+            if(data["success"]) {
                 switch_page("/2fa", window.pwd);
             }
         }
