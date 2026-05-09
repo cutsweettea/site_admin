@@ -50,7 +50,7 @@ app.post('/:page', (req: express.Request, res: express.Response) => {
         return res.sendStatus(404);
     }
 
-    if(!data) res.status(404).send();
+    if(!data) return res.sendStatus(404);
 
     res.status(200).send(data);
 });
