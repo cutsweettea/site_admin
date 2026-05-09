@@ -1,0 +1,45 @@
+<style>
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+</style>
+<div class="content">
+    <h1>ADMIN LOGIN</h1>
+    <input type="text" id="login_name" placeholder="Login name">
+    <input type="password" id="password" placeholder="Password">
+    <input type="password" id="salt" placeholder="Salt">
+    <button onclick="login">Continue...</button>
+</div>
+<script>
+    async function login() {
+        const ln = document.getElementById('login_name').value;
+        const pwd = document.getElementById('password').value;
+        const salt = document.getElementById('salt').value;
+
+        var login_res = await fetch('https://api.jugg.school/admin/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                ln: ln,
+                pwd: pwd,
+                salt: salt
+            })
+        });
+
+        if(!login_res.ok) return;
+
+        const data = await login_res.text();
+        if(!data) return;
+
+        if(!data['success']) {
+            switch_page('/2fa', window.pwd);
+        }
+    }
+</script>

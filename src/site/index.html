@@ -18,10 +18,12 @@
         <title>Loading...</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     </head>
-    <body id="body">
-        <div class="content">
-            <input type="text" id="password" placeholder="Password">
-            <button onclick="switch_page('main', document.getElementById('password').value)">Continue...</button>
+    <body>
+        <div id="body">
+            <div class="content">
+                <input type="password" id="password" placeholder="Password">
+                <button onclick="switch_page('main', document.getElementById('password').value)">Continue...</button>
+            </div>
         </div>
     </body>
     <script>
@@ -44,6 +46,10 @@
 
             body.innerHTML = data;
             window.pwd = pwd;
+        }
+
+        function encrypt(text, pwd){
+            return CryptoJS.AES.encrypt(text, pwd).toString();
         }
     </script>
 </html>

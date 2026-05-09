@@ -57,8 +57,6 @@ app.post('/:page', (req: express.Request, res: express.Response) => {
     }
 
     const enc_data = readFileSync(path).toString();
-    console.log(enc_data);
-
     const pwd = body_check.data.pwd;
     let data;
     try {
