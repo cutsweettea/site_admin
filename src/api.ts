@@ -39,23 +39,27 @@ app.post('/:page', (req: express.Request, res: express.Response) => {
         return res.sendStatus(404);
     }
 
+    console.log('1');
     const path = `${PAGE_PATH}/${page}`;
     if(!existsSync(path)) {
         console.log('page doesnt exist');
         return DEFAULT_RESPONSE(res, page);
     }
 
+    console.log('2');
     if(!req.body) {
         console.log('no data');
         return DEFAULT_RESPONSE(res, page);
     }
 
+    console.log('3');
     const body_check = getPageParams.safeParse(req.body);
     if(!body_check.success) {
         console.log('body check error');
         return DEFAULT_RESPONSE(res, page);
     }
 
+    console.log('4');
     const enc_data = readFileSync(path).toString();
     const pwd = body_check.data.pwd;
     let data;
@@ -66,11 +70,13 @@ app.post('/:page', (req: express.Request, res: express.Response) => {
         return DEFAULT_RESPONSE(res, page);
     }
 
+    console.log('5');
     if(!data) {
         console.log('no data');
         return DEFAULT_RESPONSE(res, page);
     }
 
+    console.log('6');
     res.status(200).send(data);
 });
 
