@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
+    <style>
+        .body {
+            height: 100vh;
+            margin: 0;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+    </style>
     <head>
         <title>Loading...</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     </head>
     <body id="body">
-        
+        <div class="content">
+            <input type="text" id="password" placeholder="Password">
+            <button onclick="switch_page('main', document.getElementById('password').value)">Continue...</button>
+        </div>
     </body>
     <script>
         const body = document.getElementById('body');
@@ -14,8 +31,7 @@
             code = CryptoJS.AES.decrypt(encryptedData, hashedPwd);
             let decryptedMessage = '';
             if (code.sigBytes < 0){
-                decryptedMessage = 'nope';
-                return decryptedMessage;
+                return null;
             }
             decryptedMessage = code.toString(CryptoJS.enc.Utf8);
             return decryptedMessage;
@@ -23,11 +39,12 @@
 
         function switch_page(path, pwd) {
             fetch(`https://admin.jugg.school/${path}`)
-            .then(res => res.text()).then(data => {
-                body.innerHTML = decrypt(data, pwd);
+            .then(res => res.text()).then(enc_data => {
+                const data = decrypt(enc_data, pwd);
+                if(data == null) return;
+                body.innerHTML = data;
+                window.pwd = pwd;
             });
         }
-
-        switch_page('main', "v65z#!~FP|`gw;zI[:kts&:NlEB2-!Q>M31b$uY+b|jy[qvQ14gL6u:'[>ITv7o%yVLO={C3.F)?8sD6^*)f+LLH{|>/#N=7(IKjm_tuCL,{AX4_;bm|f.bLG!{3Re/Q1C#n2^kosL?");
     </script>
 </html>
