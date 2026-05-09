@@ -39,7 +39,7 @@
 
             if(!get_res.ok) return;
 
-            const data = get_res.text();
+            const data = await get_res.text();
             if(!data) return;
 
             body.innerHTML = data;
