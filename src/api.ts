@@ -21,7 +21,7 @@ const DEFAULT_RESPONSE = (res: express.Response, page: string) => {
 <title>Error</title>\
 </head>\
 <body>\
-<pre>Cannot POST /${page}</pre>\
+<pre>Cannot POST ${page}</pre>\
 </body>\
 </html>\
 `);
@@ -66,7 +66,10 @@ app.post('/:page', (req: express.Request, res: express.Response) => {
         return DEFAULT_RESPONSE(res, page);
     }
 
-    if(!data) return res.sendStatus(404);
+    if(!data) {
+        console.log('no data');
+        return DEFAULT_RESPONSE(res, page);
+    }
 
     res.status(200).send(data);
 });

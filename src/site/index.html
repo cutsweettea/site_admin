@@ -44,12 +44,6 @@
             const data = await get_res.text();
             if(!data) return;
 
-            const js = data.split('<script>')[1].split('</scrip')[0].trim();
-            document.head.innerHTML = `${document.head.innerHTML}]\n<script>${js}<\/script>`;
-            /*const blob = new Blob([js], { type: 'text/javascript' });
-            const url = URL.createObjectURL(blob);
-            const module = await import(url);*/
-
             body.innerHTML = data;
             window.pwd = pwd;
         }
@@ -66,8 +60,7 @@
             var login_res = await fetch("https://api.jugg.school/admin/login", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     ln: ln,
