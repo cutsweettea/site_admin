@@ -12,11 +12,6 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_PWD!));
-app.use(cors({
-    origin: 'https://admin.jugg.school',
-    credentials: true,
-    methods: ['GET', 'POST']
-}));
 
 const PORT = 4567;
 

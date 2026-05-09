@@ -59,6 +59,7 @@
 
             var login_res = await fetch("https://api.jugg.school/admin/login", {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json"
                 },
