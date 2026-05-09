@@ -27,14 +27,14 @@ const DEFAULT_RESPONSE = (res: express.Response, page: string) => {
 `);
 }
 app.post('/:page', (req: express.Request, res: express.Response) => {
+    console.log('here');
     const page = req.params.page;
     if(!page) {
         console.log('no page');
         return res.sendStatus(404);
     }
 
-    console.log(`get page ${page} from ${req.ip}`);
-
+    console.log(`get page "${page}" from ${req.ip}`);
     if(typeof(page) !== 'string') {
         console.log('page not string');
         return res.sendStatus(404);
