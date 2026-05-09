@@ -19,6 +19,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
     res.sendFile(`${PATH}/index.html`);
 });
 
+const LOCKED_PATH = `${PATH}/locked`;
 app.get('/panel', async (req: express.Request, res: express.Response) => {
     let tfsid;
     if('tfsid' in req.signedCookies) tfsid = req.signedCookies.tfsid;
@@ -42,7 +43,7 @@ app.get('/panel', async (req: express.Request, res: express.Response) => {
         return res.sendStatus(404);
     }
 
-    return res.sendStatus(200);
+    return res.sendFile(`${LOCKED_PATH}/panel.html`)
 });
 
 const PAGE_PATH = `${PATH}/pages`;
