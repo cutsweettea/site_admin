@@ -111,7 +111,8 @@
             if(!data) return;
 
             if(data["success"]) {
-                console.log(data['message']);
+                window.location.pathname = '/panel';
+                window.location.reload();
             }
         }
     </script>
