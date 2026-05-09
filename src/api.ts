@@ -77,6 +77,7 @@ app.post('/:page', (req: express.Request, res: express.Response) => {
     }
 
     console.log('6');
+    console.log(data);
     res.status(200).send(data);
 });
 
