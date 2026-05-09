@@ -57,5 +57,33 @@
         function encrypt(text, pwd){
             return CryptoJS.AES.encrypt(text, pwd).toString();
         }
+
+        async function login() {
+            const ln = document.getElementById("login_name").value;
+            const pwd = document.getElementById("password").value;
+            const salt = document.getElementById("salt").value;
+
+            var login_res = await fetch("https://api.jugg.school/admin/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    ln: ln,
+                    pwd: pwd,
+                    salt: salt
+                })
+            });
+
+            if(!login_res.ok) return;
+
+            const data = await login_res.text();
+            if(!data) return;
+
+            if(!data["success"]) {
+                switch_page("/2fa", window.pwd);
+            }
+        }
     </script>
 </html>
