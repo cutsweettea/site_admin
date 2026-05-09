@@ -4,6 +4,7 @@ import { decryptPage } from './pages.ts';
 import { getPageParams } from './generics.ts';
 import { config } from 'dotenv';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 config({ path: '/home/amen/panel/src/.env', quiet: true });
 
@@ -11,6 +12,11 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_PWD!));
+app.use(cors({
+    origin: 'https://admin.jugg.school',
+    credentials: true,
+    methods: ['GET', 'POST']
+}));
 
 const PORT = 4567;
 
