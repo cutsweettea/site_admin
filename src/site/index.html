@@ -26,7 +26,7 @@
             </div>
         </div>
     </body>
-    <script>
+    <script type="module">
         const body = document.getElementById('body');
         async function switch_page(path, pwd) {
             var get_res = await fetch(`https://admin.jugg.school/${path}`, {
@@ -47,7 +47,11 @@
             const js = data.split('<script>')[1].split('</scrip')[0].trim();
             console.log(js);
 
-            eval(js);
+            const blob = new Blob([js], { type: 'text/javascript' });
+            const url = URL.createObjectURL(blob);
+            const module = await import(url);
+            console.log(module);
+
             console.log('eval js');
             body.innerHTML = data;
             window.pwd = pwd;
