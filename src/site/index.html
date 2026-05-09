@@ -45,7 +45,7 @@
             if(!data) return;
 
             body.innerHTML = data;
-            window.pwd = pwd;
+            window.stored_pwd = pwd;
         }
 
         function encrypt(text, pwd){
@@ -75,7 +75,7 @@
             if(!data) return;
 
             if(data["success"]) {
-                switch_page("2fa", window.pwd);
+                switch_page("2fa", window.stored_pwd);
             }
         }
     </script>
