@@ -74,8 +74,8 @@
                     <input type="text" id="admin_ln" placeholder="Login name">
                     <input type="password" id="admin_pwd" placeholder="Password">
                     <input type="password" id="admin_salt" placeholder="Salt">
-                    <input type="text" id="uid" placeholder="Linked UID">
-                    <textarea class="gpg-text" id="gpg" placeholder="GPG public key"></textarea>
+                    <input type="text" id="admin_uid" placeholder="Linked UID">
+                    <textarea class="gpg-text" id="admin_gpg" placeholder="GPG public key"></textarea>
                     <button class="create-admin-account-button" onclick="createAdminAccount()">Create</button>
                 </div>
             </div>
@@ -83,7 +83,33 @@
     </body>
     <script>
         async function createAdminAccount() {
-            
+            const ln = document.getElementById('admin_ln');
+            const pwd = document.getElementById('admin_pwd');
+            const salt = document.getElementById('admin_salt');
+            const uid = document.getElementById('admin_uid');
+            const gpg = document.getElementById('admin_gpg');
+
+            const res = await fetch('https://api.jugg.school/admin/user/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    ln: ln,
+                    pwd: pwd,
+                    salt: salt,
+                    uid: uid,
+                    gpg: gpg
+                })
+            });
+
+            if(!res.ok) alert('Failed creating account');
+            const data = await res.json();
+
+            if(!data['success']) alert('Failed creating account');
+            alert(data['message']);
         }
     </script>
 </html>
