@@ -83,11 +83,11 @@
     </body>
     <script>
         async function createAdminAccount() {
-            const ln = document.getElementById('admin_ln');
-            const pwd = document.getElementById('admin_pwd');
-            const salt = document.getElementById('admin_salt');
-            const uid = document.getElementById('admin_uid');
-            const gpg = document.getElementById('admin_gpg');
+            const ln = document.getElementById('admin_ln').value;
+            const pwd = document.getElementById('admin_pwd').value;
+            const salt = document.getElementById('admin_salt').value;
+            const uid = document.getElementById('admin_uid').value;
+            const gpg = document.getElementById('admin_gpg').value;
 
             const res = await fetch('https://api.jugg.school/admin/user/create', {
                 method: 'POST',

@@ -4,7 +4,6 @@ import { decryptPage } from './pages.ts';
 import { getPageParams } from './generics.ts';
 import { config } from 'dotenv';
 import cookieParser from 'cookie-parser';
-import cors from 'cors';
 
 config({ path: '/home/amen/panel/src/.env', quiet: true });
 
