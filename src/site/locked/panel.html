@@ -9,20 +9,81 @@
         .content {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
             height: 100%;
+            width: 100%;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .admin-account-creation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #000;
+            border-radius: 5px;
+            height: fit-content;
+            width: fit-content;
+            padding: 10px 20px;
+        }
+
+        .admin-account-creation-label {
+            position: relative;
+            background-color: #fff;
+            bottom: 20px;
+            padding: 0 8px;
+            margin: 0;
+        }
+
+        input {
+            margin: 5px 0;
+        }
+
+        .create-admin-account-button {
+            margin: 5px 0;
+            width: fit-content;
+        }
+
+        .gpg-text {
+            margin: 5px 0;
+            width: 350px;
+            height: 100px;
         }
     </style>
     <head>
-        <title>Jugg School Admin</title>
+        <title>Admin Panel</title>
     </head>
     <body>
         <div class="content">
-            <h1>ADMIN PANEL</h1>
+            <div class="header">
+                <h1 id="header-text">[a]DMIN [p]ANEL</h1>
+            </div>
+            <div class="main-content">
+                <div class="admin-account-creation">
+                    <h3 class="admin-account-creation-label">CREATE ADMIN ACCOUNT</h3>
+                    <input type="text" id="admin_ln" placeholder="Login name">
+                    <input type="password" id="admin_pwd" placeholder="Password">
+                    <input type="password" id="admin_salt" placeholder="Salt">
+                    <input type="text" id="uid" placeholder="Linked UID">
+                    <textarea class="gpg-text" id="gpg" placeholder="GPG public key"></textarea>
+                    <button class="create-admin-account-button" onclick="createAdminAccount()">Create</button>
+                </div>
+            </div>
         </div>
     </body>
     <script>
-        
+        async function createAdminAccount() {
+            
+        }
     </script>
 </html>
