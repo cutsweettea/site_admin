@@ -97,18 +97,24 @@
                 },
                 credentials: 'include',
                 body: JSON.stringify({
+                    uid: uid,
                     ln: ln,
                     pwd: pwd,
                     salt: salt,
-                    uid: uid,
                     gpg: gpg
                 })
             });
 
-            if(!res.ok) alert('Failed creating account');
+            if(!res.ok) {
+                alert('Failed creating account');
+                return;
+            }
             const data = await res.json();
 
-            if(!data['success']) alert('Failed creating account');
+            if(!data['success']) {
+                alert('Failed creating account');
+                return;
+            }
             alert(data['message']);
         }
     </script>
