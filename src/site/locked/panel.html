@@ -26,7 +26,7 @@
             height: 100%;
         }
 
-        .admin-account-creation {
+        .content-box {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -35,9 +35,10 @@
             height: fit-content;
             width: fit-content;
             padding: 10px 20px;
+            margin: 10px 20px;
         }
 
-        .admin-account-creation-label {
+        .content-box-label {
             position: relative;
             background-color: #fff;
             bottom: 20px;
@@ -49,7 +50,7 @@
             margin: 5px 0;
         }
 
-        .create-admin-account-button {
+        button {
             margin: 5px 0;
             width: fit-content;
         }
@@ -69,14 +70,19 @@
                 <h1 id="header-text">[a]DMIN [p]ANEL</h1>
             </div>
             <div class="main-content">
-                <div class="admin-account-creation">
-                    <h3 class="admin-account-creation-label">CREATE ADMIN ACCOUNT</h3>
+                <div class="content-box">
+                    <h3 class="content-box-label">CREATE ADMIN ACCOUNT</h3>
                     <input type="text" id="admin_ln" placeholder="Login name">
                     <input type="password" id="admin_pwd" placeholder="Password">
                     <input type="password" id="admin_salt" placeholder="Salt">
                     <input type="text" id="admin_uid" placeholder="Linked UID">
                     <textarea class="gpg-text" id="admin_gpg" placeholder="GPG public key"></textarea>
-                    <button class="create-admin-account-button" onclick="createAdminAccount()">Create</button>
+                    <button onclick="createAdminAccount()">Create</button>
+                </div>
+                <div class="content-box">
+                    <h3 class="content-box-label">CREATE INVITE</h3>
+                    <input type="text" id="invite_link" placeholder="Invite Link">
+                    <button onclick="createInvite()">Generate Link</button>
                 </div>
             </div>
         </div>
@@ -116,6 +122,34 @@
                 return;
             }
             alert(data['message']);
+        }
+
+        async function createInvite() {
+            const link = document.getElementById('invite_link').value;
+            const res = await fetch('https://api.jugg.school/admin/invite', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    link: link
+                })
+            });
+
+            if(!res.ok) {
+                alert('Failed creating invite');
+                return;
+            }
+            const data = await res.json();
+
+            if(!data['success']) {
+                alert('Failed creating invite');
+                return;
+            }
+            const generated_link = data['message'];
+            console.log(generated_link);
         }
     </script>
 </html>
